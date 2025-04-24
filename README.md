@@ -1,2 +1,3 @@
-# projeto-desenvolve
-Atividades
+Projeto desenvolve / Itabira.
+Introdução da WEB.
+PDITA788
