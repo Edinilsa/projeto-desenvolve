@@ -1,0 +1,101 @@
+/* 1. Aspectos gerais */
+body {
+    width: 960px; /* Tamanho fixo para a página */
+    margin: 0 auto;
+    font-family: sans-serif; /* Fonte sans-serif */
+}
+
+p {
+    text-indent: 1em; /* Indentação de parágrafos */
+}
+
+/* 2. Títulos */
+h1 {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* 3. Seções de resumo e principal */
+
+/* Seção de resumo: pode usar id ou classe, como #zen-summary */
+#zen-summary {
+    text-align: center;
+}
+
+/* Parágrafos da seção principal (dentro de .main) */
+.main p {
+    line-height: 1.5;
+}
+
+/* 4. Abreviaturas */
+abbr {
+    font-variant: small-caps;
+}
+
+
+   .intro {
+    height: 550px; /* Altura da introdução */
+}
+
+/* Ocultar o container design-archives */
+#design-archives {
+    display: none;
+}
+
+/* 2. Estilização do cabeçalho */
+header {
+    background-color: #222; /* Fundo escuro */
+    color: #fff;            /* Fonte clara */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+header h1 {
+    margin: 0;
+    padding-left: 1em; /* Espaço lateral no título principal */
+}
+
+header h2 {
+    margin: 0;
+}
+
+/* 3. Menus da barra lateral */
+.sidebar ul {
+    list-style: none; /* Remover bullets */
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 1em; /* Espaço entre itens */
+    text-align: center; /* Centralizar itens */
+}
+
+/* 4. Rodapé invertido com destaque */
+footer {
+    background-color: #222;
+    color: #fff;
+    margin: 4% 0; /* Espaçamento externo */
+    padding: 1em;
+    text-align: center;
+}
+
+footer a {
+    display: inline-block;
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 2px solid #fff;
+    color: #fff;
+    text-decoration: none;
+}
