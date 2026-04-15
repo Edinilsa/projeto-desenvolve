@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizador</title>
+</head>
+<body>
+
+<h2>Contagem Regressiva</h2>
+<div id="temporizador"></div>
+
+<script>
+
+// 1. Função para calcular o tempo restante
+function calcularTempoRestante(dataFutura) {
+
+    const agora = new Date();
+    const diferenca = dataFutura - agora;
+
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+    const segundos = Math.floor((diferenca / 1000) % 60);
+
+    return { dias, horas, minutos, segundos };
+}
+
+const dataFutura = new Date("2028-12-31T22:00:00");
+
+function atualizarTemporizador() {
+
+    const tempo = calcularTempoRestante(dataFutura);
+
+    document.getElementById("temporizador").innerHTML =
+        tempo.dias + " dias " +
+        tempo.horas + " horas " +
+        tempo.minutos + " minutos " +
+        tempo.segundos + " segundos";
+}
+
+setInterval(atualizarTemporizador, 1000);
+
+</script>
+
+</body>
+</html>
