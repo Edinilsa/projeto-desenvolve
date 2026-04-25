@@ -1,0 +1,16 @@
+const Subtrai = (num1, num2) => num1 - num2;
+
+const Multiplica = (num1, num2) => num1 * num2;
+
+const Divide = (num1, num2) => num1 / num2;
+
+// Função que mostra os resultados
+const MostraResultado = (num1, num2) => {
+    console.log(`[Soma] entre ${num1} e ${num2}, ${Soma(num1, num2)}`);
+    console.log(`[Subtração] entre ${num1} e ${num2}, ${Subtrai(num1, num2)}`);
+    console.log(`[Multiplicação] entre ${num1} e ${num2}, ${Multiplica(num1, num2)}`);
+    console.log(`[Divisão] entre ${num1} e ${num2}, ${Divide(num1, num2)}`);
+};
+
+// Execução
+MostraResultado(10, 5);
