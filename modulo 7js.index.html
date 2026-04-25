@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        /* FORMULÁRIO FIXO */
+        form {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 10px;
+        }
+
+        textarea {
+            width: 80%;
+            height: 50px;
+        }
+
+        button {
+            padding: 8px;
+        }
+
+        /* FEED */
+        #feed {
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        .post {
+            background: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FORMULÁRIO -->
+    <form id="formPost">
+        <textarea id="texto" placeholder="Digite seu post"></textarea>
+        <button type="submit">Postar</button>
+    </form>
+
+    <!-- FEED -->
+    <div id="feed"></div>
+
+    <script>
+        let posts = [];
+
+        // BUSCAR IMAGEM DE GATINHO
+        async function buscarGatinho() {
+            const res = await fetch("https://api.thecatapi.com/v1/images/search");
+            const dados = await res.json();
+            return dados[0].url;
+        }
+
+        // RENDERIZAR POSTS
+        function renderizarFeed() {
+            const feed = document.getElementById("feed");
+            feed.innerHTML = "";
+
+            posts
+            .sort((a, b) => b.data - a.data)
+            .forEach((post, index) => {
+
+                const div = document.createElement("div");
+                div.className = "post";
+
+                div.innerHTML = `
+                    <img src="${post.avatar}" class="avatar">
+                    <strong>${post.usuario}</strong>
+                    <p>${post.texto}</p>
+                    <img src="${post.imagem}">
+                    <br><br>
+                    <button onclick="curtir(${index})">❤️ ${post.likes}</button>
+                `;
+
+                feed.appendChild(div);
+            });
+        }
+
+        // CURTIR
+        function curtir(index) {
+            posts[index].likes++;
+            renderizarFeed();
+        }
+
+        // POSTAR
+        document.getElementById("formPost").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const texto = document.getElementById("texto").value;
+
+            if (texto.trim() === "") return;
+
+            const imagem = await buscarGatinho();
+
+            const novoPost = {
+                data: new Date(),
+                usuario: "Edinilsa",
+                avatar: "https://i.pravatar.cc/150?img=3",
+                texto: texto,
+                imagem: imagem,
+                likes: 0
+            };
+
+            posts.push(novoPost);
+
+            document.getElementById("texto").value = "";
+
+            renderizarFeed();
+        });
+    </script>
+
+</body>
+</html>
+
+
