@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        input {
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .tarefa {
+            margin-top: 10px;
+        }
+
+        .concluida {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Tarefas</h1>
+
+    <!-- Campo de texto -->
+    <input type="text" id="descricao" placeholder="Digite uma tarefa">
+
+    <!-- Botão -->
+    <button onclick="adicionarTarefa()">Adicionar</button>
+
+    <!-- Lista -->
+    <div id="lista"></div>
+
+    <script>
+        // Array de tarefas
+        let tarefas = [];
+
+        // Adicionar tarefa
+        function adicionarTarefa() {
+            const input = document.getElementById("descricao");
+            const texto = input.value;
+
+            if (texto === "") {
+                alert("Digite uma tarefa!");
+                return;
+            }
+
+            const novaTarefa = {
+                descricao: texto,
+                status: false
+            };
+
+            tarefas.push(novaTarefa);
+            input.value = "";
+
+            renderizarTarefas();
+        }
+
+        // Alterar status
+        function alterarStatus(index) {
+            tarefas[index].status = !tarefas[index].status;
+            renderizarTarefas();
+        }
+
+        // Mostrar tarefas na tela
+        function renderizarTarefas() {
+            const lista = document.getElementById("lista");
+            lista.innerHTML = "";
+
+            tarefas.forEach((tarefa, index) => {
+                const div = document.createElement("div");
+                div.className = "tarefa";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = tarefa.status;
+                checkbox.onclick = () => alterarStatus(index);
+
+                const span = document.createElement("span");
+                span.textContent = tarefa.descricao;
+
+                if (tarefa.status) {
+                    span.classList.add("concluida");
+                }
+
+                div.appendChild(checkbox);
+                div.appendChild(span);
+
+                lista.appendChild(div);
+            });
+        }
+    </script>
+
+</body>
+</html>
