@@ -1,0 +1,76 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #e6ecf0;
+        margin: 0;
+        padding-top: 160px; /* Espaço para o header fixo não cobrir o feed */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #topo {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: #fff;
+        border-bottom: 1px solid #ccd6dd;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        z-index: 10;
+    }
+
+    .container-post {
+        width: 100%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    textarea {
+        padding: 10px;
+        border: 1px solid #ccd6dd;
+        border-radius: 8px;
+        resize: none;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+
+    #btn-postar {
+        background-color: #1da1f2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        align-self: flex-end;
+    }
+
+    /* Estilo dos Cards do Feed */
+    .post-card {
+        background: white;
+        width: 100%;
+        max-width: 500px;
+        border: 1px solid #ccd6dd;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        padding: 15px;
+    }
+
+    .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    
+    .avatar { width: 40px; height: 40px; border-radius: 50%; }
+
+    .cat-pic { width: 100%; border-radius: 8px; margin: 10px 0; }
+
+    .btn-curtir {
+        background: none;
+        border: 1px solid #e0245e;
+        color: #e0245e;
+        padding: 5px 15px;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+</style>

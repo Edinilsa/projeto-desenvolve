@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade Curtidas - LocalStorage</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        input, button { padding: 8px; margin: 5px 2px; }
+        #mensagem { font-weight: bold; margin-top: 15px; }
+        .btn-limpar { background-color: #ff4d4d; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Lista de Curtidas</h2>
+    
+    <input type="text" id="nomeInput" placeholder="Digite um nome...">
+    <button id="btnCurtir">Curtir</button>
+    <button id="btnLimpar" class="btn-limpar">Limpar Tudo</button>
+
+    <p id="mensagem">Ninguém curtiu</p>
+
+    <!-- Importando o arquivo de lógica -->
+    <script src="script.js"></script>
+</body>
+</html>
