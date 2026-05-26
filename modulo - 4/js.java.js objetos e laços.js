@@ -1,67 +1,111 @@
-// 1. Definição do array de objetos para armazenar o estoque
+// Array para armazenar os livros
 let estoque = [];
 
-// 2. Funções para gerenciar o estoque
+// Função para adicionar livro
+function adicionarLivro() {
 
-// Adiciona um novo livro ao estoque
-function adicionarLivro(titulo, autor, quantidade) {
-    // 3. Verifica se o livro já existe no estoque
-    const livroExistente = estoque.find(livro => livro.titulo.toLowerCase() === titulo.toLowerCase());
+    let titulo = document.getElementById("titulo").value;
+    let autor = document.getElementById("autor").value;
+    let quantidade = Number(document.getElementById("quantidade").value);
 
-    if (livroExistente) {
-        console.log(`Erro: O livro "${titulo}" já existe no estoque. Use atualizarQuantidade().`);
-    } else {
-        estoque.push({ titulo, autor, quantidade });
-        console.log(`Sucesso: Livro "${titulo}" adicionado.`);
+    // Verifica se o livro já existe
+    let livroExiste = false;
+
+    for (let i = 0; i < estoque.length; i++) {
+
+        if (estoque[i].titulo === titulo) {
+            livroExiste = true;
+            break;
+        }
     }
+
+    if (livroExiste) {
+
+        alert("Livro já existe no estoque!");
+
+    } else {
+
+        let livro = {
+            titulo: titulo,
+            autor: autor,
+            quantidade: quantidade
+        };
+
+        estoque.push(livro);
+
+        alert("Livro adicionado com sucesso!");
+    }
+
+    listarLivros();
 }
 
-// Remove um livro do estoque pelo título
+// Função para remover livro
 function removerLivro(titulo) {
-    const indice = estoque.findIndex(livro => livro.titulo.toLowerCase() === titulo.toLowerCase());
 
-    if (indice !== -1) {
-        estoque.splice(indice, 1); // Remove o elemento pelo índice
-        console.log(`Sucesso: Livro "${titulo}" removido do estoque.`);
-    } else {
-        console.log(`Erro: Livro "${titulo}" não encontrado.`);
+    for (let i = 0; i < estoque.length; i++) {
+
+        if (estoque[i].titulo === titulo) {
+
+            estoque.splice(i, 1);
+
+            alert("Livro removido!");
+
+            listarLivros();
+
+            return;
+        }
     }
+
+    alert("Livro não encontrado!");
 }
 
-// Atualiza a quantidade de um livro existente
-function atualizarQuantidade(titulo, novaQuantidade) {
-    const livro = estoque.find(livro => livro.titulo.toLowerCase() === titulo.toLowerCase());
+// Função para atualizar quantidade
+function atualizarQuantidade(titulo) {
 
-    if (livro) {
-        livro.quantidade = novaQuantidade;
-        console.log(`Sucesso: Quantidade de "${titulo}" atualizada para ${novaQuantidade}.`);
-    } else {
-        console.log(`Erro: Livro "${titulo}" não encontrado para atualização.`);
+    let novaQuantidade = prompt("Digite a nova quantidade:");
+
+    for (let i = 0; i < estoque.length; i++) {
+
+        if (estoque[i].titulo === titulo) {
+
+            estoque[i].quantidade = Number(novaQuantidade);
+
+            alert("Quantidade atualizada!");
+
+            listarLivros();
+
+            return;
+        }
     }
+
+    alert("Livro não encontrado!");
 }
 
-// 4. Lista todos os livros usando laço de repetição
+// Função para listar livros
 function listarLivros() {
-    console.log("\n--- ESTOQUE ATUAL ---");
-    if (estoque.length === 0) {
-        console.log("O estoque está vazio.");
-    } else {
-        estoque.forEach((livro, index) => {
-            console.log(`${index + 1}. Título: ${livro.titulo} | Autor: ${livro.autor} | Qtd: ${livro.quantidade}`);
-        });
+
+    let lista = document.getElementById("listaLivros");
+
+    lista.innerHTML = "";
+
+    for (let i = 0; i < estoque.length; i++) {
+
+        lista.innerHTML += `
+            <div class="livro">
+                <p><strong>Título:</strong> ${estoque[i].titulo}</p>
+
+                <p><strong>Autor:</strong> ${estoque[i].autor}</p>
+
+                <p><strong>Quantidade:</strong> ${estoque[i].quantidade}</p>
+
+                <button onclick="removerLivro('${estoque[i].titulo}')">
+                    Remover
+                </button>
+
+                <button onclick="atualizarQuantidade('${estoque[i].titulo}')">
+                    Atualizar Quantidade
+                </button>
+            </div>
+        `;
     }
-    console.log("----------------------\n");
 }
-
-// --- TESTANDO O SISTEMA ---
-
-adicionarLivro("O Hobbit", "J.R.R. Tolkien", 10);
-adicionarLivro("1984", "George Orwell", 5);
-adicionarLivro("O Hobbit", "J.R.R. Tolkien", 2); // Deve dar erro (já existe)
-
-listarLivros();
-
-atualizarQuantidade("1984", 12);
-removerLivro("O Hobbit");
-
-listarLivros();
