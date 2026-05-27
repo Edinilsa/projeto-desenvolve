@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Curtidas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Quem curtiu?</h2>
+    
+    <input type="text" id="nomeInput" placeholder="Digite um nome...">
+    
+    <button id="btnCurtir">Curtir</button>
+    
+    <p id="resultado">Ninguém curtiu</p>
+</div>
+
+<script>
+    // Array para armazenar os nomes das pessoas que curtiram
+    const curtidas = [];
+
+    // Mapeamento dos elementos do DOM
+    const nomeInput = document.getElementById('nomeInput');
+    const btnCurtir = document.getElementById('btnCurtir');
+    const resultado = document.getElementById('resultado');
+
+    // Função principal disparada ao clicar no botão
+    btnCurtir.addEventListener('click', () => {
+        // Pega o valor do input e remove espaços extras no início/fim
+        const nome = nomeInput.value.trim();
+
+        // Validação: impede que campos vazios sejam adicionados
+        if (nome === "") {
+            alert("Por favor, digite um nome antes de curtir.");
+            return;
+        }
+
+        // Verifica se o nome já está no array (ignora maiúsculas/minúsculas para evitar duplicatas bobas)
+        const nomeJaExiste = curtidas.some(n => n.toLowerCase() === nome.toLowerCase());
+
+        if (!nomeJaExiste) {
+            curtidas.push(nome); // Adiciona o nome ao array
+        } else {
+            alert(`${nome} já curtiu esta publicação!`);
+        }
+
+        // Limpa o campo de texto e foca nele novamente
+        nomeInput.value = "";
+        nomeInput.focus();
+
+        // Atualiza o texto do parágrafo baseado nas regras solicitadas
+        atualizarTextoCurtidas();
+    });
+
+    // Função responsável pela lógica de exibição do texto
+    function atualizarTextoCurtidas() {
+        const total = curtidas.length;
+
+        if (total === 0) {
+            resultado.textContent = "Ninguém curtiu";
+        } else if (total === 1) {
+            resultado.textContent = `${curtidas[0]} curtiu`;
+        } else if (total === 2) {
+            resultado.textContent = `${curtidas[0]} e ${curtidas[1]} curtiram`;
+        } else {
+            resultado.textContent = `${curtidas[0]}, ${curtidas[1]} e mais ${total - 2} pessoas curtiram`;
+        }
+    }
+</script>
+
+</body>
+</html>
